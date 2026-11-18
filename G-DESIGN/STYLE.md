@@ -1,6 +1,7 @@
 # STYLE — Boustrophédon · « Chemin »
 
-> Style validé par Gaia le 2026-11-18, sur la planche `planches/v4/01-chemin.html`.
+> **VERROUILLÉ le 2026-11-18 (`/lock`)**. Style validé par Gaia sur `planches/v4/01-chemin.html`, puis décliné sur les 4 pages, toutes validées.
+> Toute modification passe désormais par une nouvelle version datée dans `DESIGN.md`.
 > Toutes les pages le déclinent strictement. Références : Don't Look Up (trait, personnages), Gapsy (objets, annotations).
 
 ## 1. Idée
