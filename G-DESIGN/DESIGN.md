@@ -75,3 +75,11 @@ V1 conservée dans `planches/v1/` pour l'historique.
 - Le choix de la direction (Marqueur ou Relief), ou un mélange : la matière de Relief avec la main de Marqueur, par exemple.
 - **Relief** : coût de rendu (environ 10 couches SVG par lettre), à vérifier sur mobile Reddit si le jeu y tourne.
 - La main de Marqueur pointe la dernière lettre lue, jamais la suivante : elle ne doit pas souffler la réponse.
+
+### V3 bis — 2026-11-18 · deux directions de plus pour la page Jeu
+
+Demande de Gaia : « autres directions Jeu ». Même alphabet au feutre, nouvelles matières et nouvelles mises en scène. Les planches 01 et 02 sont reconstruites avec le kit enrichi (rendu identique, filtres corrigés).
+- `planches/v3/03-chemin.html` — **Chemin** (réf. Don't Look Up) : la ligne devient une route qui serpente. De petits lecteurs dessinés s'y promènent et commentent le chemin dans des bulles, jamais le mot. Toi, en jaune `#f5c84b`, tu avances de lettre en lettre. Les lettres choisies deviennent des pierres de gué jaunes. Drapeaux START et END.
+- `planches/v3/04-tampon.html` — **Tampon** (réf. Gapsy pour la matière) : la page du jour est tamponnée sur du kraft `#d7bf98`, avec un tampon par lettre, un tampon dateur « 09 DEC 2026 » et le logo dans un cadre. L'encre bleu-noir `#283069` est fraîche sur la ligne en cours et sèche ailleurs. Les lettres choisies sont re-tamponnées en rouge `#c7372f`. Grands tampons d'état « TRY AGAIN » et « SOLVED ». La lecture sort sur un ticket dentelé.
+
+Kit SVG ajouté : personnages-haricots (marche, bras levés, casquette ou cheveux), bulles de dialogue, filtre « encre de tampon » (couverture mouchetée et bords mâchés), glyphes F, G, X et apostrophe. Correctif : les filtres travaillent maintenant en coordonnées absolues, car les traits parfaitement verticaux disparaissaient.
