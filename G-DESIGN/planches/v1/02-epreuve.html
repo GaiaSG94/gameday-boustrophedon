@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boustrophédon — planche v1 / 02 Épreuve</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#e6e5e1;color:#1e1e1c;font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;-webkit-font-smoothing:antialiased}
+.toolbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;background:#1e1e1c;color:#e6e5e1;font-size:13px}
+.toolbar b{font-weight:600}
+.fit{font:inherit;font-size:12px;background:transparent;color:#e6e5e1;border:1px solid #55554f;border-radius:4px;padding:5px 10px;cursor:pointer}
+.sheet{width:max-content;padding:40px}
+.intro{display:grid;grid-template-columns:560px 1fr 1fr;gap:48px;margin-bottom:36px;max-width:1878px}
+.intro h1{margin:0 0 6px;font-size:40px;letter-spacing:-.02em;line-height:1.05}
+.intro .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#77756e;margin-bottom:10px}
+.intro p{margin:0 0 10px;font-size:15px;line-height:1.55;color:#3b3a36}
+.intro h3{margin:0 0 12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#77756e;font-weight:600}
+.sw{display:flex;gap:10px;margin-bottom:18px}
+.sw div{width:92px;font-size:12px;line-height:1.35;color:#3b3a36}
+.sw i{display:block;height:56px;border-radius:6px;margin-bottom:6px;border:1px solid rgba(0,0,0,.08)}
+.spec{font-size:13px;line-height:1.6;color:#3b3a36}
+.spec .m{font-family:ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono", Menlo, Consolas, monospace}
+.frames{display:flex;gap:48px;align-items:flex-start}
+figure{margin:0}
+figcaption{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#77756e;margin-bottom:10px}
+.screen{position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.08),0 18px 50px rgba(0,0,0,.14);border-radius:6px}
+.desk .screen{width:1440px;height:900px}
+.mob .screen{width:390px;height:844px;border-radius:44px;border:10px solid #111;box-sizing:content-box}
+.states{margin-top:44px}
+.states h2{margin:0 0 4px;font-size:20px;letter-spacing:-.01em}
+.states .sub{margin:0 0 18px;font-size:14px;color:#5a5853}
+.strow{display:flex;gap:28px}
+.st .box{width:390px;height:714px;overflow:hidden;border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.10);zoom:.82}
+
+/* ---------- host chrome (neutral, not ours) ---------- */
+.host{position:absolute;inset:0;background:var(--host-bg);color:var(--host-text);font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:14px}
+.d-top{height:56px;display:flex;align-items:center;gap:16px;padding:0 20px;background:var(--host-surface);border-bottom:1px solid var(--host-line)}
+.d-top .mark{width:32px;height:32px;border-radius:50%;background:var(--host-line)}
+.d-top .search{flex:0 0 560px;margin:0 auto;height:40px;border-radius:20px;background:var(--host-bg);border:1px solid var(--host-line);display:flex;align-items:center;padding:0 16px;color:var(--host-muted)}
+.d-top .av{width:32px;height:32px;border-radius:50%;background:var(--host-line)}
+.d-body{display:grid;grid-template-columns:248px 760px 336px;gap:24px;justify-content:center;padding-top:16px}
+.d-nav{padding:8px 0;border-right:1px solid var(--host-line);height:828px}
+.d-nav a{display:block;padding:9px 20px;color:var(--host-muted);text-decoration:none}
+.d-nav a.on{color:var(--host-text);background:var(--host-surface);border-radius:8px;margin-right:12px}
+.d-nav .sep{height:1px;background:var(--host-line);margin:12px 20px 12px 0}
+.d-nav .cap{padding:6px 20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--host-muted)}
+.post-meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--host-muted);margin:4px 0 8px}
+.post-meta .sub{color:var(--host-text);font-weight:600}
+.post-meta .pic{width:24px;height:24px;border-radius:50%;background:var(--host-line)}
+.post-title{font-size:20px;font-weight:600;margin:0 0 12px;color:var(--host-text)}
+.d-app{width:760px;height:620px;border-radius:16px;overflow:hidden;border:1px solid var(--host-line)}
+.post-bar{display:flex;gap:10px;margin-top:10px;font-size:12px;color:var(--host-muted)}
+.post-bar span{background:var(--host-surface);border:1px solid var(--host-line);border-radius:16px;padding:7px 14px}
+.rail .card{background:var(--host-surface);border:1px solid var(--host-line);border-radius:12px;padding:16px;font-size:13px;color:var(--host-muted);line-height:1.5}
+.rail .card b{display:block;color:var(--host-text);font-size:14px;margin-bottom:6px}
+.m-status{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-size:15px;font-weight:600;background:var(--host-surface)}
+.m-status .ic{display:flex;gap:6px}.m-status .ic i{width:17px;height:11px;border-radius:2px;background:var(--host-text);opacity:.85}
+.m-bar{height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--host-surface);border-bottom:1px solid var(--host-line);font-size:15px}
+.m-bar .back{font-size:26px;line-height:1;color:var(--host-text)}
+.m-bar .t{flex:1;font-weight:600}.m-bar .t small{display:block;font-weight:400;font-size:12px;color:var(--host-muted)}
+.m-bar .more{color:var(--host-muted);letter-spacing:2px}
+.m-app{height:714px}
+.m-home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;border-radius:3px;background:var(--host-text);opacity:.85;transform:translateX(-50%)}
+
+/* ---------- game app: structure shared by the 3 directions ---------- */
+.app{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;padding:20px 18px 14px;gap:12px;font-family:var(--sans);color:var(--text);background:var(--paper)}
+.app--d{padding:26px 48px 18px;gap:14px}
+.hd{width:100%;display:flex;justify-content:space-between;align-items:flex-start}
+.brand{display:flex;flex-direction:column;gap:3px}
+.date{font-size:12px;color:var(--muted)}
+.meta{display:flex;gap:14px;align-items:center;font-size:13px}
+.clock{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.streak{display:inline-flex;align-items:center;gap:5px}
+.streak .lbl{color:var(--muted)}
+.tally{width:18px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.app--m .streak .lbl{display:none}
+.rule{margin:2px 0 0;max-width:330px;text-align:center;font-size:14px;line-height:1.45;color:var(--muted)}
+.rule em{font-style:normal;color:var(--text);font-weight:600}
+.board{position:relative;margin:auto 0 6px}
+.grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(6,var(--cell));gap:var(--gap)}
+.trace{position:absolute;top:0;z-index:0;overflow:visible;pointer-events:none}
+.trace path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cell{position:relative;width:var(--cell);height:var(--cell);border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cell .l{position:relative;font-family:var(--mono);font-size:calc(var(--cell) * .46);line-height:1}
+.cell .n{position:absolute;top:3px;right:4px;font-size:10px;font-weight:700;font-family:var(--sans);line-height:1}
+.strip{position:relative;width:100%;max-width:354px;height:52px;display:flex;align-items:center;justify-content:center;gap:2px;font-family:var(--mono);font-size:24px;letter-spacing:.32em}
+.app--d .strip,.app--d .actions{max-width:430px}
+.strip .count{position:absolute;right:14px;font-family:var(--sans);font-size:11px;letter-spacing:.02em;color:var(--muted)}
+.strip .ph{font-family:var(--sans);font-size:13px;letter-spacing:0;color:var(--muted)}
+.caret{width:2px;height:24px;background:currentColor;animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.msg{margin:0;min-height:19px;font-size:13px;text-align:center}
+.actions{width:100%;max-width:354px;display:flex;gap:10px;margin-top:auto}
+.btn{height:50px;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.btn.ghost{width:108px}.btn.primary{flex:1}
+.btn[disabled]{opacity:.35;cursor:default}
+.ft{font-size:11px;color:var(--muted)}
+
+
+:root{--paper:#f3f2ee;--ink:#121212;--accent:#e8452c;--text:#121212;--muted:#8a877f;--line:#d9d7d0;--mono:ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono", Menlo, Consolas, monospace;--sans:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif}
+.wm{font-weight:800;font-size:22px;letter-spacing:-.035em}
+.app--d .wm{font-size:28px}
+.date{text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+.clock{font-weight:600}
+.streak b{font-weight:800}
+.tally{stroke:var(--accent)}
+.cell .l{font-family:var(--sans);font-weight:800;font-size:calc(var(--cell) * .64);letter-spacing:-.03em;color:var(--ink);transition:opacity .2s}
+.off-row .l{opacity:.17}
+.is-picked .l{color:var(--accent)}
+.is-found .l{color:var(--accent)}
+
+.app.is-found .cell:not(.is-found) .l{opacity:.14}
+.is-wrong .l{color:var(--ink)}
+.cell.is-wrong::after{content:"";position:absolute;left:18%;right:18%;top:50%;height:3px;background:var(--accent);transform:rotate(-8deg)}
+.n{color:var(--accent)}
+.snake{stroke:var(--ink);stroke-width:1;opacity:.28}
+.band{display:none}
+.chev{stroke:var(--ink);stroke-width:1.6;opacity:.25}
+.chev.on{stroke:var(--accent);stroke-width:2.2;opacity:1}
+.start{fill:var(--ink);opacity:.5}
+.end{stroke:var(--ink);stroke-width:1.2;opacity:.4}
+.hit{stroke:var(--accent);stroke-width:3}
+.strip{background:var(--ink);color:var(--paper);border-radius:999px}
+.strip .count{color:#9a978f}
+.strip .ph{color:#9a978f}
+.caret{background:var(--accent)}
+.is-wrong .strip .word{text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:3px}
+.msg{color:var(--ink);font-weight:500}
+.msg b{color:var(--accent)}
+.btn{border-radius:999px}
+.btn.primary{background:var(--accent);color:#fff;border:0}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+
+.host{--host-bg:#eef0f2;--host-surface:#ffffff;--host-line:#e1e4e7;--host-text:#1a1a1b;--host-muted:#737a80}
+</style>
+</head>
+<body>
+<div class="toolbar"><span><b>Boustrophédon</b> · Planche v1 / 02 — Épreuve · page principale : <b>Jeu</b> · démo : page du 09/12/2026 (seed réelle, mot QUARTZ)</span><button class="fit" type="button">Actual size</button></div>
+<div class="sheet">
+  <section class="intro">
+    <div>
+      <div class="kicker">Direction 02 · s’écarte de la direction de départ</div>
+      <h1>Épreuve</h1>
+      <p>Épreuve d’imprimeur : blanc cassé, noir, un seul vermillon ; grandes lettres grasses en sans, seule la ligne en cours est en pleine encre, les autres s’effacent.</p>
+    </div>
+    <div>
+      <h3>Pourquoi</h3>
+      <p>Le jeu, c’est lire une ligne à la fois : ici la page fait ce geste à votre place en éteignant tout sauf la ligne en cours.</p><p>Des lettres très grandes et une seule couleur vive se lisent même en vignette dans le feed, là où le quadrillage se perd.</p><p>C’est la plus « produit lancé » des trois, mais elle perd le côté cahier noté à l’idéation : c’est le pari à trancher.</p>
+    </div>
+    <div>
+      <h3>Palette</h3>
+      <div class="sw"><div><i style="background:#f3f2ee"></i><b>#f3f2ee</b><br>Papier couché</div><div><i style="background:#121212"></i><b>#121212</b><br>Noir — texte et tracé</div><div><i style="background:#e8452c"></i><b>#e8452c</b><br>Vermillon — accent unique</div><div><i style="background:#8a877f"></i><b>#8a877f</b><br>Gris — secondaire</div><div><i style="background:#d9d7d0"></i><b>#d9d7d0</b><br>Filet</div></div>
+      <h3>Typo</h3>
+      <p class="spec">Sans système <span class="m">800</span> pour les lettres (62 % de la case, approche serrée) et le titre · Mono pour le chrono et le mot en cours</p>
+      <h3>Motif</h3>
+      <p class="spec">Filet noir 1 px très discret sous les lignes ; le sens est porté par l’extinction des lignes inactives (18 %) et un chevron vermillon sur la ligne active. Lettre choisie : vermillon + numéro.</p>
+    </div>
+  </section>
+
+  <section class="frames">
+    <figure class="desk">
+      <figcaption>Desktop · 1440 × 900 · post ouvert dans le feed, jeu en vue étendue inline</figcaption>
+      <div class="screen"><div class="host">
+        <div class="d-top"><span class="mark"></span><span class="search">Search</span><span class="av"></span></div>
+        <div class="d-body">
+          <nav class="d-nav"><a class="on">Home</a><a>Popular</a><a>Explore</a><div class="sep"></div><div class="cap">Communities</div><a>r/boustrophedon</a><a>r/wordgames</a><a>r/typography</a></nav>
+          <main>
+            <div class="post-meta"><span class="pic"></span><span class="sub">r/boustrophedon</span><span>· 6 h</span></div>
+            <h2 class="post-title">Today’s page — Wednesday, December 9</h2>
+            <div class="d-app" data-app data-size="d" data-cell="60" data-gap="8" data-state="reading"></div>
+            <div class="post-bar"><span>Vote</span><span>214 comments</span><span>Share</span></div>
+          </main>
+          <aside class="rail"><div class="card"><b>r/boustrophedon</b>One page a day, the same for every reader. A new page at 00:00 UTC.</div></aside>
+        </div>
+      </div></div>
+    </figure>
+    <figure class="mob">
+      <figcaption>Mobile · 390 × 844 · vue étendue du post</figcaption>
+      <div class="screen"><div class="host">
+        <div class="m-status"><span>9:41</span><span class="ic"><i></i><i></i><i></i></span></div>
+        <div class="m-bar"><span class="back">‹</span><span class="t">Today’s page<small>r/boustrophedon</small></span><span class="more">•••</span></div>
+        <div class="m-app" data-app data-size="m" data-cell="46" data-gap="6" data-state="reading"></div>
+        <span class="m-home"></span>
+      </div></div>
+    </figure>
+  </section>
+
+  <section class="states">
+    <h2>États de la page Jeu — mobile</h2>
+    <p class="sub">Même page, même seed. Le joueur tape les lettres dans l’ordre de lecture ; « Read it out » vérifie. Aucune donnée inventée : les états reproduisent le comportement actuel du code (réessai libre, série +1 si mot trouvé).</p>
+    <div class="host strow" style="position:static;background:transparent"><figure class="st"><figcaption>1 · Vide — rien de choisi</figcaption><div class="box" data-app data-size="m" data-cell="46" data-gap="6" data-state="idle"></div></figure><figure class="st"><figcaption>2 · En lecture — ligne active</figcaption><div class="box" data-app data-size="m" data-cell="46" data-gap="6" data-state="reading"></div></figure><figure class="st"><figcaption>3 · Mauvaise lecture</figcaption><div class="box" data-app data-size="m" data-cell="46" data-gap="6" data-state="wrong"></div></figure><figure class="st"><figcaption>4 · Mot trouvé → carte de fin</figcaption><div class="box" data-app data-size="m" data-cell="46" data-gap="6" data-state="found"></div></figure></div>
+  </section>
+</div>
+<script>
+(function () {
+  // Demo data: real output of generateSnake('2026-12-09') from src/shared/puzzle.ts
+  var GRID = 'OYJRLDRAUQTYTZCNRNMSSVTH'.split('');
+  var ROWS = 4, COLS = 6;
+  var SOLUTION = [9, 8, 7, 6, 12, 13]; // QUARTZ
+  var PATH = [];
+  for (var r = 0; r < ROWS; r++) {
+    var cs = [0, 1, 2, 3, 4, 5];
+    if (r % 2) cs.reverse();
+    cs.forEach(function (c) { PATH.push(r * COLS + c); });
+  }
+
+  var STATES = {
+    idle: { picked: [], clock: '00:03' },
+    reading: { picked: [9, 8, 7, 6], clock: '00:41' },
+    wrong: { picked: [6, 7, 8, 9, 10, 11], clock: '00:47' },
+    found: { picked: SOLUTION.slice(), clock: '00:52' }
+  };
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function svgEl(tag, attrs) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  var TALLY = '<svg class="tally" viewBox="0 0 20 14" aria-hidden="true"><path d="M3 2v10M7 2v10M11 2v10M15 2v10M1 11L18 3"/></svg>';
+
+  function trace(board, cell, gap, state, picked) {
+    var R = (cell + gap) / 2;
+    var pad = R + 6;
+    var w = COLS * cell + (COLS - 1) * gap + pad * 2;
+    var h = ROWS * cell + (ROWS - 1) * gap;
+    var base = cell * 0.5 + cell * 0.36;
+    function cx(c) { return pad + c * (cell + gap) + cell / 2; }
+    function by(r) { return r * (cell + gap) + base; }
+    function seg(from, to, extendEnds) {
+      var d = '';
+      for (var i = from; i <= to; i++) {
+        var p = PATH[i], r = Math.floor(p / COLS), c = p % COLS;
+        var x = cx(c), y = by(r);
+        var dir = r % 2 ? -1 : 1;
+        if (i === from) {
+          var sx = extendEnds ? x - dir * (cell / 2) : x - dir * cell * 0.32;
+          d += 'M' + sx + ' ' + y + ' L' + x + ' ' + y;
+        } else {
+          var q = PATH[i - 1], qr = Math.floor(q / COLS);
+          if (qr !== r) {
+            var ex = cx(q % COLS) + (qr % 2 ? -1 : 1) * (cell / 2);
+            d += ' L' + ex + ' ' + by(qr);
+            d += ' A' + R + ' ' + R + ' 0 0 ' + (qr % 2 ? 0 : 1) + ' ' + ex + ' ' + y;
+          }
+          d += ' L' + x + ' ' + y;
+        }
+        if (i === to) {
+          var tx = extendEnds ? x + dir * (cell / 2) : x + dir * cell * 0.32;
+          d += ' L' + tx + ' ' + y;
+        }
+      }
+      return d;
+    }
+    var svg = svgEl('svg', { class: 'trace', width: w, height: h, viewBox: '0 0 ' + w + ' ' + h });
+    svg.style.left = -pad + 'px';
+    svg.appendChild(svgEl('path', { class: 'snake', d: seg(0, PATH.length - 1, true) }));
+    // active row band
+    var last = picked.length ? picked[picked.length - 1] : 0;
+    var ar = Math.floor(last / COLS);
+    if (state !== 'found') {
+      svg.insertBefore(svgEl('rect', {
+        class: 'band', x: pad - gap / 2, y: ar * (cell + gap) - gap / 2,
+        width: COLS * cell + COLS * gap, height: cell + gap, rx: 4
+      }), svg.firstChild);
+    }
+    // direction chevrons in the middle of each row
+    for (var r2 = 0; r2 < ROWS; r2++) {
+      var mx = pad + 3 * cell + 2.5 * gap, y2 = by(r2), d2 = r2 % 2 ? -1 : 1, s = Math.max(4, cell * 0.09);
+      svg.appendChild(svgEl('path', {
+        class: 'chev' + (r2 === ar && state !== 'found' ? ' on' : ''),
+        d: 'M' + (mx - d2 * s) + ' ' + (y2 - s) + ' L' + (mx + d2 * s * 0.6) + ' ' + y2 + ' L' + (mx - d2 * s) + ' ' + (y2 + s)
+      }));
+    }
+    // start dot and end arrow
+    svg.appendChild(svgEl('circle', { class: 'start', cx: pad - cell / 2 - 2, cy: by(0), r: Math.max(3, cell * 0.06) }));
+    var ey = by(ROWS - 1), ex2 = pad - cell / 2, a = Math.max(5, cell * 0.11);
+    svg.appendChild(svgEl('path', { class: 'end', d: 'M' + (ex2 + a) + ' ' + (ey - a) + ' L' + ex2 + ' ' + ey + ' L' + (ex2 + a) + ' ' + (ey + a) }));
+    if (state === 'found') {
+      var i0 = PATH.indexOf(SOLUTION[0]);
+      svg.appendChild(svgEl('path', { class: 'hit', d: seg(i0, i0 + SOLUTION.length - 1, false) }));
+    }
+    board.appendChild(svg);
+  }
+
+  function renderApp(host) {
+    var state = host.getAttribute('data-state') || 'reading';
+    var cell = +host.getAttribute('data-cell');
+    var gap = +host.getAttribute('data-gap');
+    var size = host.getAttribute('data-size') || 'm';
+    var s = STATES[state];
+    var picked = s.picked;
+    var last = picked.length ? picked[picked.length - 1] : 0;
+    var activeRow = Math.floor(last / COLS);
+    var word = picked.map(function (p) { return GRID[p]; }).join('');
+    var streak = state === 'found' ? 7 : 6;
+
+    var app = el('div', 'app app--' + size + ' is-' + state);
+    app.style.setProperty('--cell', cell + 'px');
+    app.style.setProperty('--gap', gap + 'px');
+
+    var hd = el('header', 'hd');
+    hd.appendChild(el('div', 'brand', '<span class="wm">Boustrophedon</span><span class="date">Wed · Dec 9</span>'));
+    hd.appendChild(el('div', 'meta',
+      '<span class="clock" aria-label="time">' + s.clock + '</span>' +
+      '<span class="streak">' + TALLY + '<b>' + streak + '</b><span class="lbl">day streak</span></span>'));
+    app.appendChild(hd);
+
+    app.appendChild(el('p', 'rule', 'Lines run <em>left to right</em>, then <em>right to left</em>. Tap the hidden word in reading order.'));
+
+    var board = el('div', 'board');
+    var grid = el('div', 'grid');
+    GRID.forEach(function (letter, i) {
+      var order = picked.indexOf(i);
+      var r = Math.floor(i / COLS);
+      var cls = 'cell';
+      if (order >= 0) cls += ' is-picked';
+      if (state !== 'found' && r === activeRow) cls += ' in-row';
+      if (state !== 'found' && r !== activeRow) cls += ' off-row';
+      if (state === 'found' && order >= 0) cls += ' is-found';
+      if (state === 'wrong' && order >= 0) cls += ' is-wrong';
+      var b = el('button', cls, '<span class="l">' + letter + '</span>' + (order >= 0 ? '<span class="n">' + (order + 1) + '</span>' : ''));
+      b.setAttribute('aria-label', 'letter ' + letter);
+      grid.appendChild(b);
+    });
+    board.appendChild(grid);
+    app.appendChild(board);
+    trace(board, cell, gap, state, picked);
+
+    var strip = el('div', 'strip');
+    if (word) {
+      strip.innerHTML = '<span class="word">' + word + '</span>' + (state === 'reading' ? '<span class="caret"></span>' : '') +
+        '<span class="count">' + word.length + ' letters</span>';
+    } else {
+      strip.innerHTML = '<span class="ph">Your reading appears here</span>';
+    }
+    app.appendChild(strip);
+
+    var msg = el('p', 'msg');
+    if (state === 'wrong') msg.innerHTML = 'Not today’s word. The line turns at the edge — follow it.';
+    else if (state === 'found') msg.innerHTML = 'Read in <b>00:52</b>. Streak up to <b>7 days</b>.';
+    else if (state === 'idle') msg.innerHTML = 'Start anywhere. The word sits on the line.';
+    else msg.innerHTML = '&nbsp;';
+    app.appendChild(msg);
+
+    var act = el('div', 'actions');
+    if (state === 'found') {
+      act.innerHTML = '<button class="btn primary wide">See today’s card</button>';
+    } else {
+      var dis = picked.length ? '' : ' disabled';
+      act.innerHTML = '<button class="btn ghost"' + dis + '>Clear</button><button class="btn primary"' + dis + '>Read it out</button>';
+    }
+    app.appendChild(act);
+    app.appendChild(el('footer', 'ft', 'Same page for every reader · new page at 00:00 UTC'));
+    host.appendChild(app);
+  }
+
+  document.querySelectorAll('[data-app]').forEach(renderApp);
+
+  // fit-to-window toggle for the whole sheet
+  var sheet = document.querySelector('.sheet');
+  var btn = document.querySelector('.fit');
+  var fit = true;
+  function apply() {
+    sheet.style.zoom = 1;
+    var s = fit ? Math.min(1, (window.innerWidth - 8) / sheet.scrollWidth) : 1;
+    sheet.style.zoom = s;
+    if (btn) btn.textContent = fit ? 'Actual size' : 'Fit to window';
+  }
+  if (btn) btn.addEventListener('click', function () { fit = !fit; apply(); });
+  window.addEventListener('resize', apply);
+  apply();
+})();
+
+</script>
+</body>
+</html>
