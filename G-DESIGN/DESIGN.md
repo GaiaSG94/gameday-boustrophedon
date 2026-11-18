@@ -83,3 +83,28 @@ Demande de Gaia : « autres directions Jeu ». Même alphabet au feutre, nouvell
 - `planches/v3/04-tampon.html` — **Tampon** (réf. Gapsy pour la matière) : la page du jour est tamponnée sur du kraft `#d7bf98`, avec un tampon par lettre, un tampon dateur « 09 DEC 2026 » et le logo dans un cadre. L'encre bleu-noir `#283069` est fraîche sur la ligne en cours et sèche ailleurs. Les lettres choisies sont re-tamponnées en rouge `#c7372f`. Grands tampons d'état « TRY AGAIN » et « SOLVED ». La lecture sort sur un ticket dentelé.
 
 Kit SVG ajouté : personnages-haricots (marche, bras levés, casquette ou cheveux), bulles de dialogue, filtre « encre de tampon » (couverture mouchetée et bords mâchés), glyphes F, G, X et apostrophe. Correctif : les filtres travaillent maintenant en coordonnées absolues, car les traits parfaitement verticaux disparaissaient.
+
+## V4 — 2026-11-18 · Chemin retenu, identité jaune / noir / blanc, dessin animé
+
+**Retour de Gaia** : « améliore Chemin », en renforçant l'identité jaune, noir et blanc, les petits personnages, et un style dessin qui s'anime. → `planches/v4/01-chemin.html` (V3 conservée).
+
+**Identité**
+- Trois couleurs : blanc papier `#fffdf7`, noir `#151515`, jaune `#ffd23a` ; un seul gris `#7f7c75` pour les lettres au repos.
+- La route devient noire, avec des bords tremblés, un marquage blanc en tirets et ta voie marquée en jaune. Les chevrons de sens sont peints sur la chaussée.
+- Un grand panneau jaune à bord dessiné, sur la droite, accueille le temps, la série, la lecture et les boutons.
+- Le logo est surligné au jaune, avec la signature « A DAILY READING ROAD ».
+
+**Personnages**
+- 4 silhouettes (haricot, grand, rond, enfant), des accessoires (béret, casquette, chignon, lunettes, écharpe, sac, livre) et des poses (marche, montre, salue, lit, assis, saute de joie).
+- Un contour blanc façon autocollant les rend lisibles sur la route noire comme sur le papier.
+- Toi : corps et tête jaunes, béret noir, étiquette YOU. Neuf lecteurs sur les trottoirs et aux virages. Leurs bulles commentent le chemin, jamais le mot.
+
+**Animation (dessin animé à la main)**
+- Trait qui bout : le grain du trait change environ 7 fois par seconde (graine du filtre animée). C'est appliqué aux personnages, bulles et drapeaux seulement, pour les performances.
+- À l'ouverture : la route apparaît, puis les lettres sortent une à une **dans l'ordre du boustrophédon**, puis les pierres numérotées, puis la foule, puis les bulles.
+- En continu : marche à 2 images, rebond, salut, saut de joie à la victoire, bulles qui tanguent, curseur qui clignote.
+- Les boutons s'enfoncent au clic. Tout s'arrête si le système demande moins d'animations.
+
+**Correctifs** : placement des personnages tournés vers la gauche (une règle `transform-box` trop large les décalait). La bulle de « toi » ne couvre plus la lettre suivante (elle soufflait la réponse). Les pierres de lecture rétrécissent pour les mots longs.
+
+**À noter pour l'intégration** : le trait qui bout recalcule un filtre SVG en continu. En production, il faudra le limiter aux personnages visibles, ou pré-calculer 3 images par personnage.
