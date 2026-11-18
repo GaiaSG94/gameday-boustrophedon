@@ -7,7 +7,7 @@
 | # | Page | Rôle | Contenu clé | Statut |
 |---|------|------|-------------|--------|
 | 1 | **Post** | Donner envie de lire depuis le feed (vue inline, `splash.html`) | En-tête du post, nom du jeu, date du jour, une ligne de règle, aperçu de la grille, série du joueur, bouton d'ouverture | à dessiner |
-| 2 | **Jeu** *(page principale)* | Faire comprendre la règle en 5 s et lire la grille (vue étendue, `game.html`) | Grille 4 × 6, tracé qui serpente sous les lignes, ligne active, lettres choisies numérotées, mot en cours, chrono, série, `Clear` / `Read it out`, états : vide · en lecture · mauvaise lecture · mot trouvé | **en revue** (3 directions, v2 ; v1 rejetée) |
+| 2 | **Jeu** *(page principale)* | Faire comprendre la règle en 5 s et lire la grille (vue étendue, `game.html`) | Grille 4 × 6, tracé qui serpente sous les lignes, ligne active, lettres choisies numérotées, mot en cours, chrono, série, `Clear` / `Read it out`, états : vide · en lecture · mauvaise lecture · mot trouvé | **en revue** (v3 : 2 directions ; v1 et v2 rejetées) |
 | 3 | **Carte de fin** | Clore la partie et pousser au commentaire | Mot du jour, temps de lecture, série, rappel « nouvelle page à 00:00 UTC », invitation à commenter en un geste | à dessiner |
 | 4 | **Séries & classement** | Rendre la communauté visible | Série du joueur, scores de la communauté du jour (temps de lecture) | à dessiner |
 
