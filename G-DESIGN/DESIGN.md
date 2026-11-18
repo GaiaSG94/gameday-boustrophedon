@@ -123,3 +123,25 @@ Kit SVG ajouté : personnages-haricots (marche, bras levés, casquette ou cheveu
 **Propositions produit dessinées (à valider)** : le score du classement (deux onglets), le contenu du commentaire (temps + série + date), et les données serveur à ajouter (temps du jour, classement). Le détail est dans `PAGES.md`.
 
 **Reste** : `/lock` une fois les 4 planches validées.
+
+## LOCK — 2026-11-18 · style verrouillé
+
+Gaia valide les 4 planches V4 telles quelles et verrouille le style (`/lock`). Fin de l'exploration.
+
+**Référence d'intégration**
+- Style : `STYLE.md` (verrouillé).
+- Planches de référence :
+  - `planches/v4/01-chemin.html` (Jeu) ;
+  - `planches/v4/02-post.html` (Post) ;
+  - `planches/v4/03-carte-de-fin.html` (Carte de fin) ;
+  - `planches/v4/04-series-classement.html` (Séries & classement).
+- Propositions produit validées avec les planches :
+  - classement en deux onglets, TODAY (temps du jour) et STREAKS (séries) ;
+  - commentaire pré-rempli avec temps, série et date, sans spoiler.
+
+**Pour le développement (hors design)**
+- Serveur : stocker le temps de lecture du jour par joueur, et trier les joueurs pour le classement du jour et les séries.
+- Client : reprendre le kit SVG (alphabet maison, lecteurs, bulles, route) dans `src/client`. Limiter le trait qui bout aux personnages visibles, ou pré-calculer 3 images par personnage.
+- Bug relevé en V1 et toujours ouvert : les lettres du mot sont insérées en majuscules et le bruit en minuscules (`src/shared/puzzle.ts`).
+
+V1 à V3 sont conservées pour l'historique.
