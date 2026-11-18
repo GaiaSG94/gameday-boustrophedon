@@ -376,20 +376,63 @@ figcaption{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6
     return g;
   }
 
+  // ---------- little reader (bean figure, line art). feet at (x, y), ~46px tall at scale 1 ----------
+  function person(parent, x, y, o) {
+    o = o || {};
+    var s = o.scale || 1, ink = o.ink || '#141414', body = o.body || '#ffffff', face = o.facing || 1, r = rng(o.seed || 1);
+    var g = el('g', { transform: 'translate(' + x + ' ' + y + ') scale(' + (s * face) + ' ' + s + ')', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', filter: 'url(#rough)' }, parent);
+    el('ellipse', { cx: 0, cy: 1, rx: 11, ry: 2.6, fill: 'rgba(0,0,0,.10)' }, g);
+    var stride = o.walk ? 4 : 1.5;
+    el('path', { d: 'M-3 -10 L' + (-3 - stride) + ' 0 M3 -10 L' + (3 + stride * 0.6) + ' 0', stroke: ink, 'stroke-width': 2.6, fill: 'none' }, g);
+    el('path', { d: 'M-8 -30 Q-10 -12 -6 -9 L6 -9 Q10 -12 8 -30 Q0 -34 -8 -30 Z', fill: body, stroke: ink, 'stroke-width': 2.2 }, g);
+    if (o.armsUp) el('path', { d: 'M-7 -26 L-14 -38 M7 -26 L14 -38', stroke: ink, 'stroke-width': 2.2, fill: 'none' }, g);
+    else if (o.point) el('path', { d: 'M6 -24 L18 -28', stroke: ink, 'stroke-width': 2.2, fill: 'none' }, g);
+    el('circle', { cx: 0, cy: -40, r: 8, fill: body, stroke: ink, 'stroke-width': 2.2 }, g);
+    if (o.hair) el('path', { d: 'M-8 -41 Q-7 -50 1 -49 Q8 -48 8 -41 Q2 -45 -8 -41 Z', fill: ink, stroke: ink, 'stroke-width': 1.4 }, g);
+    if (o.cap) el('path', { d: 'M-8 -42 Q-6 -51 2 -50 Q8 -49 8 -43 L14 -42', fill: o.cap, stroke: ink, 'stroke-width': 1.8 }, g);
+    el('circle', { cx: 3, cy: -41, r: 1.2, fill: ink }, g);
+    if (r() > 0.5 && !o.cap && !o.hair) el('path', { d: 'M-4 -47 Q0 -50 4 -47', stroke: ink, 'stroke-width': 1.4, fill: 'none' }, g);
+    return g;
+  }
+  // speech bubble with hand-lettered text; tail points to (tx, ty)
+  function bubble(parent, text, x, y, tx, ty, o) {
+    o = o || {};
+    var w = word(text, { size: o.size || 11, weight: o.weight || 2.1, seed: o.seed || 3, track: 12, color: o.ink || '#141414' });
+    var ww = +w.getAttribute('width'), hh = +w.getAttribute('height');
+    var g = el('g', { filter: 'url(#rough)' }, parent);
+    var bw = ww + 12, bh = hh + 6, bx = x - bw / 2, by = y - bh / 2;
+    var mx = Math.max(bx + 10, Math.min(bx + bw - 10, tx));
+    el('path', { d: 'M' + (bx + 8) + ' ' + by + ' H' + (bx + bw - 8) + ' Q' + (bx + bw) + ' ' + by + ' ' + (bx + bw) + ' ' + (by + 8) + ' V' + (by + bh - 8) +
+      ' Q' + (bx + bw) + ' ' + (by + bh) + ' ' + (bx + bw - 8) + ' ' + (by + bh) + ' H' + (mx + 5) + ' L' + tx + ' ' + ty + ' L' + (mx - 4) + ' ' + (by + bh) +
+      ' H' + (bx + 8) + ' Q' + bx + ' ' + (by + bh) + ' ' + bx + ' ' + (by + bh - 8) + ' V' + (by + 8) + ' Q' + bx + ' ' + by + ' ' + (bx + 8) + ' ' + by + ' Z',
+      fill: o.fill || '#ffffff', stroke: o.ink || '#141414', 'stroke-width': 2, 'stroke-linejoin': 'round' }, g);
+    w.setAttribute('x', bx + 6); w.setAttribute('y', by + 3);
+    w.removeAttribute('class');
+    parent.appendChild(w);
+    return g;
+  }
+
   // shared roughen filter (marker edges)
   function defs() {
     if (document.getElementById('rough')) return;
     var s = el('svg', { width: 0, height: 0, style: 'position:absolute', 'aria-hidden': 'true' });
     var d = el('defs', {}, s);
-    var f = el('filter', { id: 'rough', x: '-5%', y: '-5%', width: '110%', height: '110%' }, d);
+    var f = el('filter', { id: 'rough', filterUnits: 'userSpaceOnUse', x: -4000, y: -4000, width: 9000, height: 9000 }, d);
     el('feTurbulence', { type: 'fractalNoise', baseFrequency: '.06', numOctaves: 2, seed: 4, result: 'n' }, f);
     el('feDisplacementMap', { in: 'SourceGraphic', in2: 'n', scale: 2.2, xChannelSelector: 'R', yChannelSelector: 'G' }, f);
     var b = el('filter', { id: 'soft', x: '-30%', y: '-30%', width: '160%', height: '160%' }, d);
     el('feGaussianBlur', { stdDeviation: 3 }, b);
+    // rubber-stamp ink: speckled coverage + chewed edges
+    var st = el('filter', { id: 'stamp', filterUnits: 'userSpaceOnUse', x: -4000, y: -4000, width: 9000, height: 9000 }, d);
+    el('feTurbulence', { type: 'fractalNoise', baseFrequency: '.55', numOctaves: 3, seed: 11, result: 'n' }, st);
+    el('feColorMatrix', { in: 'n', type: 'matrix', values: '0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.45', result: 'm' }, st);
+    el('feComposite', { in: 'SourceGraphic', in2: 'm', operator: 'in', result: 't' }, st);
+    el('feTurbulence', { type: 'fractalNoise', baseFrequency: '.09', numOctaves: 2, seed: 2, result: 'n2' }, st);
+    el('feDisplacementMap', { in: 't', in2: 'n2', scale: 1.8, xChannelSelector: 'R', yChannelSelector: 'G' }, st);
     document.body.insertBefore(s, document.body.firstChild);
   }
 
-  window.HAND = { rng: rng, layout: layout, word: word, loop: loop, arrow: arrow, uturn: uturn, line: line, tally: tally, hand: hand, defs: defs, el: el, G: G };
+  window.HAND = { person: person, bubble: bubble, rng: rng, layout: layout, word: word, loop: loop, arrow: arrow, uturn: uturn, line: line, tally: tally, hand: hand, defs: defs, el: el, G: G };
 })();
 </script>
 <script>/* Boustrophedon planches v3 — shared data + mounting. Demo = real generateSnake('2026-12-09'): QUARTZ */
