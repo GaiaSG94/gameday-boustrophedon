@@ -57,3 +57,21 @@ Chaque planche : desktop 1440 × 900 et mobile 390 × 844 côte à côte, dans l
 - **Licence des polices** : les URW base35 (Bookman, P052, Nimbus) sont en AGPL avec exception limitée au PostScript/PDF. Elles conviennent pour explorer, mais **pas pour le jeu publié**. Une fois la direction choisie, il faudra un équivalent sous licence OFL (ex. Sillon → une égyptienne ronde type Bookman ; Stèle → une capitale romaine type Cinzel / Marcellus ; Ruban → une mono type Courier Prime).
 
 V1 conservée dans `planches/v1/` pour l'historique.
+
+## V3 — 2026-11-18 · lettrage et dessins faits main en SVG (réf. Don't Look Up + Gapsy)
+
+**Retour de Gaia sur la V2** : encore « slop IA » (matière, couleurs, motifs non travaillés, pas d'identité). Gaia renvoie vers les références de la catégorie jeu du hub (`narratif-jeu`, analysées dans `REFS.md`). Choix des refs : **Don't Look Up + Gapsy**. Décision : les visuels faits main sont dessinés par Claude, en SVG.
+
+**Ce qui change en V3**
+- **Un alphabet maison au feutre**, dessiné en SVG : 38 signes (A–Z utiles, chiffres, ponctuation). Le tracé est irrégulier, chaque apparition d'une lettre est légèrement différente (penchée, ondulée), avec des bords « encre » via un filtre. C'est l'identité : la grille, le logo, les chiffres et les boutons utilisent tous ce lettrage.
+- **Des dessins faits pour le projet** : une main qui pointe (manche, poing, index), des boucles de feutre qui débordent, des demi-tours fléchés, des bâtonnets de série barrés par cinq, des ratures.
+- **Le logo s'écrit en boustrophédon** : BOUSTRO, demi-tour, puis PHEDON à rebours.
+- **2 directions au lieu de 3**, pour tenir le niveau de finition. Toutes deux sont dans la même famille de références, avec deux matières opposées :
+  - `planches/v3/01-marqueur.html` — **Marqueur** : trait d'encre sur papier `#f4f3ef`, encre `#141414`, crayon `#b9b6ae`, feutre rouge `#e5493a`. Une grande main entre dans le cadre et pointe la dernière lettre lue.
+  - `planches/v3/02-relief.html` — **Relief** : lettres en plâtre extrudées (face, tranche, liseré, ombre portée) sur un mur éclairé par trois puits de lumière, parquet au sol. Les lettres choisies sont peintes en terre cuite `#c8553d`. Le mode d'emploi est griffonné au feutre sur le mur. Le mot lu se pose au sol avec son ombre.
+- **Texte courant en Ubuntu Sans** : licence Ubuntu Font, embarquable dans le jeu. Le lettrage maison, lui, est du SVG : aucun problème de licence.
+
+**À trancher**
+- Le choix de la direction (Marqueur ou Relief), ou un mélange : la matière de Relief avec la main de Marqueur, par exemple.
+- **Relief** : coût de rendu (environ 10 couches SVG par lettre), à vérifier sur mobile Reddit si le jeu y tourne.
+- La main de Marqueur pointe la dernière lettre lue, jamais la suivante : elle ne doit pas souffler la réponse.
