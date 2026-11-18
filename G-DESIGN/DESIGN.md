@@ -33,3 +33,27 @@ Chaque planche : desktop 1440 × 900 et mobile 390 × 844 côte à côte, dans l
 ### Suite
 - Gaia choisit une direction (ou demande des `/variantes`).
 - Puis étape C : `STYLE.md` + planches Post, Carte de fin, Séries & classement.
+
+## V2 — 2026-11-18 · 3 directions à concept, desktop seul
+
+**Retour de Gaia sur la V1** : « assez slop IA » — couleurs, motifs et détails pas travaillés, pas d'identité visuelle. Le mobile est inutile : on ne montre un téléphone que si le hackathon le demande.
+
+**Vérification** : le règlement officiel (redditgameofday2026.devpost.com/rules) ne mentionne jamais le mobile. Le « mobile first » venait de nos notes internes (`IDEES.md`). → planches **desktop seul** ; le §6 du brief est annulé sur décision de Gaia.
+
+**Diagnostic de la V1** : même gabarit pour les 3 directions (pile centrée titre / règle / grille / boutons), polices système, boutons pilule, palettes « papier + accent ». Seules les couleurs changeaient.
+
+**Ce qui change en V2**
+- Chaque direction part d'un **concept tiré du mot lui-même**, et l'identité en découle : composition, matière, marque, détails.
+  - `planches/v2/01-sillon.html` — **Sillon** : « comme tourne le bœuf ». La grille est un champ labouré : un seul sillon rayé qui fait demi-tour au bord. La lecture laisse la trace rouille du soc. Bookman Demi, avoine / terre / rouille `#c2471d`.
+  - `planches/v2/02-stele.html` — **Stèle** : l'inscription archaïque rétrograde. Les lignes retour ont **les lettres en miroir** (détail historique réel). Les lettres sont gravées, celles qu'on choisit sont peintes au miltos `#a3341f`. La marque s'écrit elle-même en boustrophédon. P052, calcaire sur mur sombre.
+  - `planches/v2/03-ruban.html` — **Ruban** : une bande de papier pliée en accordéon. Les plis montrent le verso, la bande a des perforations et des bords déchirés, la lecture se fait au marqueur `#ffd23f`, la réponse sort sur un ticket déchiré. Nimbus Mono, ardoise.
+- **Trois compositions différentes** : bandeau + champ + colonne (Sillon), colonne d'identité + stèle (Stèle), bande pleine largeur + barre (Ruban).
+- **Vraies polices embarquées** en base64 : aucune requête réseau.
+- **Cadre réaliste** : le post s'ouvre en vue étendue (modale Devvit) au-dessus du feed atténué.
+- **États** : vide, mauvaise lecture, mot trouvé. Ils sont rendus en vrai avec la même seed, sous la planche.
+
+**Points à trancher**
+- La Stèle avec lettres en miroir change la difficulté : c'est un choix de design, pas seulement de style.
+- **Licence des polices** : les URW base35 (Bookman, P052, Nimbus) sont en AGPL avec exception limitée au PostScript/PDF. Elles conviennent pour explorer, mais **pas pour le jeu publié**. Une fois la direction choisie, il faudra un équivalent sous licence OFL (ex. Sillon → une égyptienne ronde type Bookman ; Stèle → une capitale romaine type Cinzel / Marcellus ; Ruban → une mono type Courier Prime).
+
+V1 conservée dans `planches/v1/` pour l'historique.
