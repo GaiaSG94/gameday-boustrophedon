@@ -108,3 +108,18 @@ Kit SVG ajouté : personnages-haricots (marche, bras levés, casquette ou cheveu
 **Correctifs** : placement des personnages tournés vers la gauche (une règle `transform-box` trop large les décalait). La bulle de « toi » ne couvre plus la lettre suivante (elle soufflait la réponse). Les pierres de lecture rétrécissent pour les mots longs.
 
 **À noter pour l'intégration** : le trait qui bout recalcule un filtre SVG en continu. En production, il faudra le limiter aux personnages visibles, ou pré-calculer 3 images par personnage.
+
+## V4 (suite) — 2026-11-18 · style validé, déclinaison des autres pages (étape C)
+
+**Validation de Gaia** : style Chemin V4 validé (« Oui, autres pages »).
+
+**Livré**
+- `STYLE.md` : palette 3 couleurs + 1 gris, typo (lettrage maison + Ubuntu Sans), grille 1120 × 756 avec panneau jaune, composants, mouvement, tableau des états, interdits.
+- `planches/v4/02-post.html` — **Post** (vue inline dans le feed). Avant d'avoir joué : logo, pitch dessiné, mini-route du jour avec la foule qui marche, toi qui salues au départ, série, bande jaune avec « START READING ». Une fois lu : le post devient le reçu du jour (mot en pierres, temps, série, « NEW ROAD IN »).
+- `planches/v4/03-carte-de-fin.html` — **Carte de fin** : « YOU READ IT! », le mot en grandes pierres, la foule qui saute sur un bout de route, des confettis dessinés, temps / série / date. Le panneau jaune contient l'aperçu du commentaire (sans spoiler), « POST TO COMMENTS » et le lien vers le classement.
+- `planches/v4/04-series-classement.html` — **Séries & classement** : onglets TODAY / STREAKS, podium dessiné, liste 4 à 9 avec avatars, ta ligne en jaune (#23), foule qui défile sur une route. Le panneau jaune montre la série géante, les 7 derniers jours et le top 3 des séries.
+- Outillage : un kit de dessin partagé (route, lecteurs, bulles, drapeaux, pierres, boutons, panneau, logo) réutilisé par toutes les planches V4.
+
+**Propositions produit dessinées (à valider)** : le score du classement (deux onglets), le contenu du commentaire (temps + série + date), et les données serveur à ajouter (temps du jour, classement). Le détail est dans `PAGES.md`.
+
+**Reste** : `/lock` une fois les 4 planches validées.
