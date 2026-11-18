@@ -1,3 +1,4 @@
-# DESIGN - gameday-p14
+# DESIGN - gameday-boustrophedon
 
-> A completer (Claude, prompt 07-design).
+Journal de design : voir [G-DESIGN/DESIGN.md](G-DESIGN/DESIGN.md).
+Planches : `G-DESIGN/planches/v1/` (ouvrir les .html en double-cliquant).
